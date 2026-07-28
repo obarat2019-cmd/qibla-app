@@ -26,17 +26,13 @@
       multiView: false,
       noCdn: false,
       webSocketEndpoint: "/ws",
-      entrypointBaseUrl: "/",
-      assetBase: "/",
+      entrypointBaseUrl: "/qibla-app/",
+      assetBase: "/qibla-app/",
       routeUrlStrategy: "path",
-      canvasKitBaseUrl: "/canvaskit/",
-      // Default fallback only — `patch_index.py` overrides this with the
-      // resolved per-build URL (CDN or local) at deploy time. The `.mjs`
-      // suffix is required because python-worker.js is a module worker
-      // that loads the runtime via dynamic `import()`. See client/web/python.js.
-      pyodideUrl: "/pyodide/pyodide.mjs",
+      canvasKitBaseUrl: "/qibla-app/canvaskit/",
+      pyodideUrl: "/qibla-app/pyodide/pyodide.mjs",
       webRenderer: "auto",
-      fontFallbackBaseUrl: "assets/fonts/", // for Noto Emoji, use Google CDN
+      fontFallbackBaseUrl: "assets/fonts/",
       appPackageUrl: "app.tar.gz"
     }
 
@@ -46,34 +42,6 @@
 
     flet.flutterAppLoaded.then((flutterApp) => {
       console.log("Flutter app loaded");
-      if (flet.multiView) {
-        console.log(flutterApp.addView({
-          hostElement: document.querySelector('#view-1'),
-          initialData: {
-            script: 'print("Hello from view 1")',
-            randomValue: Math.floor(Math.random() * 100),
-          },
-          viewConstraints: {
-            //maxWidth: Infinity,
-            maxHeight: Infinity,
-            minHeight: 300,
-            minWidth: 620
-          }
-        }));
-        console.log(flutterApp.addView({
-          hostElement: document.querySelector('#view-2'),
-          initialData: {
-            script: 'print("Hello from view 2")',
-            bar: "baz"
-          },
-          viewConstraints: {
-            minWidth: 620,
-            //maxWidth: 320,
-            //minHeight: 400,
-            maxHeight: 400,
-          }
-        }));
-      }
     });
   </script>
 
@@ -85,8 +53,8 @@ flet.pyodideUrl="https://cdn.jsdelivr.net/pyodide/v314.0.3/full/pyodide.mjs";
 flet.noCdn=false;
 flet.webRenderer="canvaskit";
 flet.routeUrlStrategy="path";
-flet.entrypointBaseUrl="/";
-flet.assetBase="/";
+flet.entrypointBaseUrl="/qibla-app/";
+flet.assetBase="/qibla-app/";
 </script>
 
   <script src="python.js"></script>
@@ -151,10 +119,5 @@ flet.assetBase="/";
     <img src="icons/loading-animation.png" alt="Loading..." />
   </div>
   <script src="flutter_bootstrap.js" async></script>
-
-  <!-- <h1>View 1</h1>
-  <div id="view-1" style="display: flex; justify-content: center;"></div>
-  <h1>View 2</h1>
-  <div id="view-2"></div> -->
 </body>
 </html>
